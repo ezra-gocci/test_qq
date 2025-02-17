@@ -46,7 +46,7 @@ cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};\
                       PWD='+ password, attrs_before={SQL_COPT_SS_ENCRYPT : 1, SQL_COPT_SS_TRUST_SERVER_CERTIFICATE : 1})
 
 cursor = cnxn.cursor()
-cursor.execute("CREATE TABLE sample (id INT IDENTITY(1,1) PRIMARY KEY, data NVARCHAR(100)")
+cursor.execute("CREATE TABLE sample (id INT IDENTITY(1,1) PRIMARY KEY, data NVARCHAR(100))")
 result = cursor.execute("SELECT @@version").fetchone()
 result = cursor.execute("SELECT* FROM sample").fetchone()
 
