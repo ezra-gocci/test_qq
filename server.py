@@ -32,7 +32,7 @@ def get_secret():
 
     # Your code goes here.
 server = 'database-prod.cx0goossu17s.eu-west-2.rds.amazonaws.com'
-database = 'master'
+database = 'test'
 username = 'admin'
 password = 'Qh[[D#kwV35KeLu8|MV]6S<Y)r$7'
 SQL_COPT_SS_TRUST_SERVER_CERTIFICATE = 1228  
@@ -48,7 +48,7 @@ cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};\
 cursor = cnxn.cursor()
 # cursor.execute("CREATE TABLE sample (id INT IDENTITY(1,1) PRIMARY KEY, data NVARCHAR(100))")
 result = cursor.execute("SELECT @@version").fetchone()
-result = cursor.execute("SELECT* FROM sample").fetchone()
+result = cursor.execute("SELECT * FROM sample").fetchone()
 
 print(result)
 
@@ -60,7 +60,8 @@ class MyServer(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
+        result = cursor.execute("SELECT * FROM sample").fetchone()
+        self.wfile.write(bytes(f"<html><head><title>{cursor.execute("SELECT * FROM sample").fetchone()}</title></head>", "utf-8"))
         self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
         self.wfile.write(bytes("<body>", "utf-8"))
         self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
